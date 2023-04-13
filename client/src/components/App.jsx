@@ -1,15 +1,18 @@
 import React from 'react';
 import testData from './TestData.js';
 import MovieList from './MovieList.jsx';
-import MovieObj from './MovieObj.jsx';
-import MovieSubmit from './MovieSubmit.jsx'
-import SearchList from './SearchList.jsx'
+// import MovieObj from './MovieObj.jsx';
+import MovieSubmit from './MovieSubmit.jsx';
+import SearchList from './SearchList.jsx';
+import WatchedButton from './WatchedButton.jsx';
+
 const {useState, useEffect} = React;
 
 
-const App = (props) => {
-  //useStates
-//need master list
+const App = ({props}) => {
+
+  // useStates
+// need master list
   const [masterList, setMasterList] = useState([]);
   const [revisedList, setRevisedList] = useState(masterList);
   const [searchString, setSearchString] = useState(''); //search states
@@ -18,6 +21,7 @@ const App = (props) => {
   // const [movieState, setMovieState] = useState('');
   let timeout = null;
   useEffect(() => {
+    console.log('this is a test')
     timeout = setTimeout(() => {
       if (searchString.length > 0) {
         setRevisedList(masterList.filter(
@@ -33,6 +37,7 @@ const App = (props) => {
 
   useEffect(() => {
     setRevisedList(masterList);
+    console.log(masterList)
   }, [masterList])
 
   //DEPRECATED HANDLERS
@@ -52,10 +57,7 @@ const App = (props) => {
   //     setRevisedList(listSearched)
   //   }
   // }
-  // const moveStateHandler = (event) => {
-  //   event.preventDefault();
 
-  // }
 
   //rest of APP
   return (
@@ -66,12 +68,11 @@ const App = (props) => {
         </h1>
       </header>
       <div className="list-controller">
-        {/* <button onClick={() => {setRevisedList(masterList)}}>Return Home</button> */}
+        <button onClick={() => {setRevisedList(masterList)}}>Return Home</button>
 
         <MovieSubmit addMovie={addMovie} setAddMovie={setAddMovie} masterList={masterList} setMasterList={setMasterList} setRevisedList={setRevisedList}/>
-
         <SearchList setSearchString={setSearchString}/>
-        {/* //add watched and to Watch */}
+        <WatchedButton setRevisedList={setRevisedList} masterList={masterList}/>
       </div>
         <MovieList masterList={masterList} setMasterList={setMasterList} revisedList={revisedList} />
     </div>
