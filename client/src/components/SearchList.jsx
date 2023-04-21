@@ -1,23 +1,48 @@
 import React from 'react';
 
+const SearchList = ({masterList, searchInput, setSearchInput, setInput, setWatch}) => {
+//master and setRevised
 
-//filterString
-const SearchList = ({setSearchString}) => {
+  const handleSearch = (event) => { //doesn't work yet
+    // if (!event.target.value) return masterList
+      setSearchInput(event.target.value);
+      // setInput(searchInput)
 
-  // const [searchString, setSearchString] = useState("")
+  }
 
-  return (
-    <div >
-      {/* <form> */}
-        <input id="search-bar" type="text" placeholder="Search..."
-        onChange={(event) => {setSearchString(event.target.value)}}/>
-        <button className="search-button" type="submit" onClick={(event) => {
-          let input = document.getElementById('search-bar');
-          setSearchString(input);
-        }}>Search!</button>
-      {/* </form> */}
+
+  return (  //TRY TO DO NO WORK IN HERE
+    <div>
+      <form
+        className="search"
+        onSubmit={(event) => {
+          event.preventDefault()
+          setInput(searchInput)
+          setSearchInput('')
+          event.target.reset() //clears the search bar
+          }}>
+        <button
+          type="button"
+          onClick={(event) => setWatch(true)}>
+          Watched
+        </button>
+        <button
+          type="button"
+          value="false"
+          onClick={(event) => setWatch(false)}>
+          To Watch
+        </button>
+        <input
+          className="search-input"
+          type="text"
+          placeholder="Search..."
+          value={searchInput}
+          onChange={handleSearch}>
+        </input>
+        <button type="submit">Search</button>
+      </form>
+
     </div>
   )
 }
-
 export default SearchList;

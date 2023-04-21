@@ -1,20 +1,43 @@
 import React from 'react';
-import MovieObj from './MovieObj.jsx';
+import MovieListEntry from './MovieListEntry.jsx';
 
-const MovieList = ({masterList, setMasterList, revisedList}) => {
 
-  return (
-  <div className="movie-list">
+
+
+const MovieList = ({masterList, setMasterList, input, watch}) => {
+
+  const inputHandler = (masterList, watch) => {
+    if(watch.length === 0) {
+
+
+    }
+
+  }
+    const alteredList = masterList
+      .filter((movie) => movie.title.toLowerCase().includes(input.toLowerCase()))
+      .filter((movie) => {
+        if (watch === '') {
+          return movie
+        } else {
+          return watch === movie.watched
+        }
+      })
+      .map((movieObj, ind) =>
+        <MovieListEntry
+          masterList={masterList}
+          setMasterList={setMasterList}
+          key={ind}
+          movie={movieObj}/>)
+
+  return ( //TRY TO DO NO WORK IN HERE
+    <div>
       {
-        masterList.length === 0 ? 'List is empty, please add movies.'
-        : revisedList.length > 0 ? revisedList.map((movieItem, index) => (<MovieObj movie={movieItem} key={index} masterList={masterList} setMasterList={setMasterList}/>))
-        : 'Movie not found. Please try again'
+        alteredList.length !== 0 ? alteredList
+        : input.length !== 0 ? <div>Cannot find movie.</div>
+        :<div>Need to add movie.</div>
       }
-  </div>
+    </div>
   )
-};
-
-
-
+}
 
 export default MovieList;
