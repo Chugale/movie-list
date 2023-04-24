@@ -1,6 +1,12 @@
 import React from 'react';
+import {getImage} from '../lib/searchMovies.js';
+
 
 const MovieListEntry = ({movie, masterList, setMasterList}) => {
+
+  let imageURl = getImage((data) => {
+    return `${data.base}${data.size}${movie.image}`
+  });
 
   const toggle = () => {
     let check = masterList.slice()
@@ -21,6 +27,9 @@ const MovieListEntry = ({movie, masterList, setMasterList}) => {
             onClick={toggle}>
               {movie.watched ? 'Watched' : "To Watch"}
           </button>
+          <div className="image">
+            <img src={imageURL}></img>
+          </div>
         </div>
       </form>
 

@@ -1,6 +1,9 @@
 import React from 'react';
+import axios from 'axios';
+
 import MovieList from './MovieList.jsx';
 import MovieSubmit from './MovieSubmit.jsx';
+import TestingData from './TestingData.js';
 import SearchList from './SearchList.jsx';
 
 const {useState} = React;
@@ -12,6 +15,7 @@ const App = () => {
   const [movieInput, setMovieInput] = useState('');
   const [input, setInput] = useState('');
   const [watch, setWatch]=  useState('');
+
   return ( //TRY TO DO NO WORK IN HERE  return
     <>
       <header>
@@ -30,8 +34,6 @@ const App = () => {
           masterList={masterList}
           setMovieInput={setMovieInput}
           movieInput={movieInput}/>
-
-
         <SearchList
           masterList={masterList}
           searchInput={searchInput}
